@@ -1,0 +1,23 @@
+Part A:
+    $samtools faidx ref.fa 
+    answer: 233806 nucleotides long 
+Part B: 
+    $fastqc frag180.1.fq
+    $fastqc frag180.2.fq
+    $fastqc jump2k.1.fq
+    $fastqc jump2k.2.fq 
+    
+    frag180.1=35178 reads, 100 bp long 
+    frag180.2=35178 reads, 100 bp long 
+    jump2k.1=70355 reads, 50 bp long 
+    jump2k.2=70355 reads, 50 bp long 
+    
+Part C:
+    coverage= read length* number of reads/haploid genome length
+    coverage of frag180.1=(35178*100)/233806=15.04
+    coverage of frag180.2= (35178*100)/233806=15.04
+    coverage of jump2k.1=(70355*50)/2333806=15.04
+    coverage of jump2k.2=(70355*50)/2333806=15.04
+    
+Part D: 
+*screenshots in /week_1_homework/Question 1 
