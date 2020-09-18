@@ -1,0 +1,21 @@
+Part A:
+
+$dnadiff /Users/cmdb/qbb2020-answers/week_1_homework/Question4/FASTQFiles/ref-Copy1.fa  /Users/cmdb/qbb2020-answers/week_1_homework/Question4/FASTQFiles/contigs-Copy1.fasta
+
+answer: average identity 100% 
+    
+Part B:
+
+$nucmer /Users/cmdb/qbb2020-answers/week_1_homework/Question4/FASTQFiles/ref-Copy1.fa  /Users/cmdb/qbb2020-answers/week_1_homework/Question4/FASTQFiles/contigs-Copy1.fasta
+
+$show-coords out.delta
+/Users/cmdb/qbb2020-answers/week_1_homework/Question4/FASTQFiles/ref-Copy1.fa /Users/cmdb/qbb2020-answers/week_1_homework/Question4/FASTQFiles/contigs-Copy1.fasta
+
+answer: longest alignment is 105,831 bp
+
+Part C:
+
+answer: there is one insertion in the assembly
+
+
+

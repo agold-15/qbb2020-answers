@@ -1,0 +1,24 @@
+Part A:
+
+$jellyfish count -m 21 -C -s 1000000 /Users/cmdb/qbb2020-answers/week_1_homework/Question2/*.fq
+$jellyfish histo mer_counts.jf > reads.histo
+    
+    answer: there are 1091 kmers that occur 50 times  
+    
+Part B:
+
+    $jellyfish dump -c mer_counts.jf > dumped_kmers.fa
+    $sort -k 2 -n dumped_kmers.fa> sorted_dumped_kmers.fa 
+    $head sorted_dumped_kmers.fa > top_10_most_frequent_kmers.txt
+    
+Part C: 
+
+#import .hist file into genomescope 
+
+MIN GENOME HAPLOID LENGTH = 233,468 bp
+
+Part D: 
+
+The GenomeScope size estimate of 233,468 bp is very close to the reference genome which was 233,806 bp - only about 350 basepairs short! 
+
+
