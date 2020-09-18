@@ -1,0 +1,25 @@
+Part A:
+
+$ spades.py --pe1-1 frag180.1.fq --pe1-2 frag180.2.fq --mp1-1 jump2k.1.fq --mp1-2 jump2k.2.fq -o asm -t 4 -k 31
+
+$ grep -c '>' contigs.fasta
+
+answer: there were 4 contigs produced 
+
+Part B:
+
+$ samtools faidx contigs.fasta
+cut -f 2 contigs.fasta.fai > test  
+
+answer: total length of contigs is 234,467 bp
+
+Part C:
+
+$sort -n test 
+
+answer: longest contig is 105,831 bp
+
+
+Part D:
+
+answer: N50 contig size is 47861 bp. This is because the contigs are a total length of 243,467 bp, and the largesr is 105,831. 50% of the total assembly length is in the second contig, so the N50 size is 47,861 bp. 
