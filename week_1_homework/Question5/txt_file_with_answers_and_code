@@ -2,7 +2,7 @@ Part A:
 
 from question 4, use $show-coords out.delta
 
-answer: the position of the insertion in the assembly is 138533-14566 bp. The position of the insertion in the reference is 
+answer: the position of the insertion in the assembly is 13853-14566 bp (exclusive). The position of the insertion in the reference is 26789-26790bp. 
 
 Part B:
 
@@ -28,3 +28,7 @@ ACCTCGTTTCAGTATGCACTCCCTTAAGTCACTCAGAAAAGACTAAGGGGCT
 Part D:
 
 python3 ported_decoder.py --decode --input extracted_insertion.fa
+
+The decoded message :  1YiÉyûYY±ûYÉÑÑiÉû±	ûi)		Éû	ûñYY-ûû{11yÉ9ûUí­ûýû½ÝM=ûó³ó³ûYéÑû	Ñû1	iÑyÉQÑy±	=
+
+I tried every combination of possible coordinates in the third contig and none of them produced a message in english. 
