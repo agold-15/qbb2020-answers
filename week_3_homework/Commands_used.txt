@@ -1,0 +1,19 @@
+PART ONE 
+#after downloading the files, I need to change their chromosome name before doing PCA 
+$awk '{gsub(/^chr/,"");gsub(/^VIII/,"8");gsub(/^XIII/,"13");gsub(/^III/,"3");gsub(/^VII/,"7");gsub(/^XII/,"12");gsub(/^II/,"2");gsub(/^XIV/,"14");gsub(/^XVI/,"16");gsub(/^XV/,"15");gsub(/^XI/,"11");gsub(/^VI/,"6");gsub(/^IX/,"9");gsub(/^IV/,"4");gsub(/^V/,"5");gsub(/^X/,"10");gsub(/^I/,"1");print}' BYxRM_segs_saccer3.bam.simplified.vcf > renamed_chromosomes.vcf
+
+#run PCA analysis on vcf file 
+$plink --vcf renamed_chromosomes.vcf --pca --mind
+
+#pull out the first and second compents of the analysis to plot 
+$awk '{ print $3 }' plink.eigenvec > first_components.txt
+$awk '{ print $4 }' plink.eigenvec > second_components.txt
+
+PART TWO- in jupyter notebook 
+
+PART THREE 
+#need to change phenotype file to be tab separated instead of underscore separated. 
+$tr '_' '\t' <BYxRM_PhenoData.txt > tab_separated_phenotypes.txt
+$plink --vcf renamed_chromosomes.vcf --pheno tab_separated_phenotypes.txt --assoc --allow-no-sex --covar plink.eigenvec --covar-number 1-10 --all-pheno
+
+
