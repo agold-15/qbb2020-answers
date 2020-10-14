@@ -1,0 +1,56 @@
+command line commands: 
+
+conda install meme -y 
+conda install macs2 -y 
+bowtie2-build index/chr19.fa index/chr19
+
+bowtie2 -x index/chr19 -U sample_files/CTCF_ER4.fastq -S CTCF_ER4.sam -p6
+bowtie2 -x index/chr19 -U sample_files/CTCF_G1E.fastq -S CTCF_G1E.sam -p6
+bowtie2 -x index/chr19 -U sample_files/input_ER4.fastq -S input_ER4.sam -p6
+bowtie2 -x index/chr19 -U sample_files/input_G1E.fastq -S input_G1E.sam -p6
+
+samtools view -bSo CTCF_ER4.bam CTCF_ER4.sam
+samtools view -bSo CTCF_G1E.bam CTCF_G1E.sam
+samtools view -bSo input_ER4.bam input_ER4.sam
+samtools view -bSo input_G1E.bam input_G1E.sam
+
+samtools sort CTCF_ER4.bam -o CTCF_ER4.sorted.bam
+samtools sort CTCF_G1E.bam -o CTCF_G1E.sorted.bam
+samtools sort input_ER4.bam -o input_ER4.sorted.bam
+samtools sort input_G1E.bam -o input_G1E.sorted.bam
+
+samtools index CTCF_ER4.sorted.bam
+samtools index CTCF_G1E.sorted.bam
+samtools index input_ER4.sorted.bam
+samtools index input_G1E.sorted.bam
+
+macs2 callpeak -t CTCF_ER4.sorted.bam -c input_ER4.sorted.bam 
+macs2 callpeak -t CTCF_G1E.sorted.bam -c input_G1E.sorted.bam
+
+bedtools subtract  -a G1E_results/NA_peaks.narrowPeak -b ER4_results/NA_peaks.narrowPeak > peaks_lost.bed
+
+bedtools subtract  -a ER4_results/NA_peaks.narrowPeak -b G1E_results/NA_peaks.narrowPeak > peaks_gained.bed
+
+grep -w "intron" Mus_musculus.GRCm38.94_features.bed > mus_introns.bed
+
+grep -w "exon" Mus_musculus.GRCm38.94_features.bed > mus_exons.bed
+
+grep -w "promoter" Mus_musculus.GRCm38.94_features.bed > mus_promoter.bed
+
+bedtools intersect  -a G1E_results/NA_peaks.narrowPeak -b mus_introns.bed> G1E_intron_overlap.bed
+
+bedtools intersect  -a G1E_results/NA_peaks.narrowPeak -b mus_exons.bed> G1E_exon_overlap.bed
+
+bedtools intersect  -a G1E_results/NA_peaks.narrowPeak -b mus_promoter.bed> G1E_promoter_overlap.bed
+
+bedtools intersect  -a ER4_results/NA_peaks.narrowPeak -b mus_introns.bed> ER4_intron_overlap.bed
+
+bedtools intersect  -a ER4_results/NA_peaks.narrowPeak -b mus_exons.bed> ER4_exon_overlap.bed
+
+bedtools intersect  -a ER4_results/NA_peaks.narrowPeak -b mus_promoter.bed> ER4_promoter_overlap.bed
+
+wc -l G1E_intron_overlap.bed G1E_exon_overlap.bed G1E_promoter_overlap.bed  > G1E_intron_extron_promoter_list.txt
+
+wc -l ER4_intron_overlap.bed ER4_exon_overlap.bed ER4_promoter_overlap.bed  > ER4_intron_extron_promoter_list.txt
+
+wc -l peaks_gained.bed peaks_lost.bed > gained_lost.txt
