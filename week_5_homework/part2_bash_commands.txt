@@ -1,0 +1,15 @@
+awk -v OFS='\t' '{$11 = $8 / $9}1' NA_peaks.narrowPeak.ER4 > divided_peaks 
+sort -n -k -b 11 divided_peaks > sorted_peaks
+head -100 sorted_peaks > 100.bed
+
+bedtools getfasta -fi index/chr19.fa -bed ER4_results/100.bed > top100.fa
+
+meme-chip -meme-maxw 20 top100.fa
+
+cp JASPAR_CORE_2016.meme ../../../qbb2020-answers/week_5_homework/memechip_out/
+    
+tomtom JASPAR_CORE_2016.meme meme_out/meme.txt
+
+sort -n -b -k 6 tomtom.txt > sorted_tomtom
+
+ceqlogo -i sorted_tomtom -m 1 > strongest_motif_logo
