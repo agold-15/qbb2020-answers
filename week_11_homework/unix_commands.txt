@@ -1,0 +1,13 @@
+conda activate hifive 
+
+hifive fends --binned 100000 -L genome/mm9.len partition_file
+
+hifive hic-data -X data/WT_100kb/raw_\*.mat partition_file interaction_reads  
+
+hifive hic-project -f 25 -n 25 -j 100000 interaction_reads project_file
+
+hifive hic-normalize express -f 25 -w cis project_file
+
+grep -w "chr13" WT_fpkm-Copy1.bed > WT_FPKM_GREPPED.bed
+
+bedtools intersect -a hic_comp.bed -b WT_FPKM_GREPPED.bed -wa -wb > bedtools_insersect.bed
