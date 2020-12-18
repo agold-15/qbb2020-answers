@@ -1,0 +1,52 @@
+#part1 
+
+ktImportText -q SRR492183 SRR492186 SRR492188 SRR492189 SRR492190 SRR492193 SRR492194 SRR492197  -o output_part1.html
+
+conda install metabat2
+
+bwa index assembly.fasta
+
+bwa mem -R "@RG\tID:{83}\tSM:{83}" assembly.fasta  READS/SRR492183_1.fastq READS/SRR492183_2.fastq > 83.sam
+
+bwa mem -R "@RG\tID:{86}\tSM:{86}" assembly.fasta  READS/SRR492186_1.fastq READS/SRR492186_2.fastq > 86.sam
+
+bwa mem -R "@RG\tID:{88}\tSM:{88}" assembly.fasta  READS/SRR492188_1.fastq READS/SRR492188_2.fastq > 88.sam
+
+bwa mem -R "@RG\tID:{89}\tSM:{89}" assembly.fasta  READS/SRR492189_1.fastq READS/SRR492189_2.fastq > 89.sam
+
+bwa mem -R "@RG\tID:{90}\tSM:{90}" assembly.fasta  READS/SRR492190_1.fastq READS/SRR492190_2.fastq > 90.sam
+
+bwa mem -R "@RG\tID:{93}\tSM:{93}" assembly.fasta  READS/SRR492193_1.fastq READS/SRR492193_2.fastq > 93.sam
+
+bwa mem -R "@RG\tID:{94}\tSM:{94}" assembly.fasta  READS/SRR492194_1.fastq READS/SRR492194_2.fastq > 94.sam
+
+bwa mem -R "@RG\tID:{97}\tSM:{97}" assembly.fasta  READS/SRR492197_1.fastq READS/SRR492197_2.fastq > 97.sam
+
+samtools sort 83.sam > 83_sorted
+samtools sort 86.sam > 86_sorted
+samtools sort 88.sam > 88_sorted
+samtools sort 89.sam > 89_sorted
+samtools sort 90.sam > 90_sorted
+samtools sort 93.sam > 93_sorted
+samtools sort 94.sam > 94_sorted
+samtools sort 97.sam > 97_sorted
+
+jgi_summarize_bam_contig_depths --outputDepth depth_output_all *_sorted
+
+metabat2 -i assembly.fasta -a depth_output_all -o bin
+
+wc  bin.1.fa bin.2.fa bin.3.fa bin.4.fa bin.5.fa bin.6.fa
+
+grep -nr "NODE_" bin.1.fa > bin1
+grep -nr "NODE_" bin.2.fa > bin2
+grep -nr "NODE_" bin.3.fa > bin3
+grep -nr "NODE_" bin.4.fa > bin4
+grep -nr "NODE_" bin.5.fa > bin5
+grep -nr "NODE_" bin.6.fa > bin6
+grep -nr "NODE_" bin.7.fa > bin7
+grep -nr "NODE_" bin.8.fa > bin8
+
+
+
+
+
