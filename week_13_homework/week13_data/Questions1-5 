@@ -1,0 +1,14 @@
+1) It appears that throughout the first week, the amount of staphyloccocus and enterococcus seem to change the most! 
+2) You could use composition of the contigs to bin them together. For example, GC content in the contig. 
+3) We got 6 bins, and we think they represent ~30% of the assembly. The size of the bins are roughly on the same order of magnitude as the prokaryotic genome, so I think the size of the bins look about right. To estimate how complete and/or contaminated, I would use the package called CheckM. 
+4) My predictions for the bins are that: 
+    bin1 = Staphylococcus haemolyticus
+    bin2 = Leuconostoc citreum
+    bin3 = Staphylococcus lugdunensis 
+    bin4 = Enterococcus faecalis
+    bin5 = Cutibacterium avidum
+    bin6 = Staphylococcus epidermidis
+    bin7 = Staphylococcus aureus
+    bin8 = Anaerococcus prevotii
+You could use a program like taxator-tk to infer the taxonomy of a specific bin 
+5) I think the results from the inidvidual genome abundance and the read taxonomy are similar in that they both show lots of variation over time in Enterococcus faecalis abundance. It looks like there may be some differences in Anaerococcus abundance, but I do think the results overwhelmingly agree with each other. 
